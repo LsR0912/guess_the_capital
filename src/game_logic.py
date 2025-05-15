@@ -28,7 +28,6 @@ def button_clicked(button):
     if game.check_answer(button.cget("text")):
         update_display()
     else: 
-        print(game.last_country.name)
         update_display()
 
 def on_region_select(event):
