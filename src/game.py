@@ -7,7 +7,7 @@ class Game:
         self.last_country = None
         self.countries = Country.fetch_all_countries()
         self.selected_region = None
-        self.current_country = None
+        self.current_country = random.choice(self.countries)
         self.unknown_countries = []
         self.regions = Country.get_regions()
 
