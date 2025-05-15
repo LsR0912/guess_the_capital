@@ -91,7 +91,5 @@ correct_capital_label.pack(pady=10)
 
 update_display()
 
-# def loop():
-#     return root
-
-root.mainloop()
+def loop():
+    return root
