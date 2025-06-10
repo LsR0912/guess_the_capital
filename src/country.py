@@ -12,9 +12,11 @@ class Country:
         self.region = region
         self.languages = languages
         self.area = area
+        
     def __str__(self):
             print(f"Name: {self.name}, Capital: {self.capital}")
 
+    # Fetches all country data from an external API endpoint and returns the data.
     def fetch_countries():
         try:
             response = requests.get("https://restcountries.com/v3.1/all")
@@ -23,7 +25,8 @@ class Country:
         except requests.RequestException as e:
             print("Error", f"Failed to fetch data: {e}")
             return []
-
+        
+    # Processes a list of country data dictionaries and instantiates Country objects with relevant data, returning a list of these objects.
     @staticmethod
     def process_countries(data):
         try:
@@ -45,16 +48,20 @@ class Country:
         except Exception as e:
             print(e)
 
+    # Wraps the fetch_countries() and process_countries() methods to fetch and return all country objects in a list.
     def fetch_all_countries():
         return Country.process_countries(Country.fetch_countries())
 
+    # Returns a list of unique regions from all countries.
     def get_regions():
         countries = Country.fetch_all_countries()
         return list(dict.fromkeys(country.region for country in countries))
     
+    # Returns a list of all countries in the specified region.
     def get_countries_in_region(region_name):
         return [country for country in Country.fetch_all_countries() if country.region == region_name]
-    
+
+   # Saves a list of countries (as instances of the Country class) to a JSON file. 
     def save_countries_to_file(data, filename="countries.json"):
             """Save the country data to a JSON file."""
             try:
@@ -63,7 +70,8 @@ class Country:
                 print(f"Data successfully saved to {filename}")
             except IOError as e:
                 print(f"Error: Unable to save data to file: {e}")
-                
+
+    # Loads a list of countries from a JSON file and instanciates the Country class for each country            
     @staticmethod
     def load_countries_from_file(filename="data/countries.json"):
         """Load country data from a JSON file and instantiate Country objects."""

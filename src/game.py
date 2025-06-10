@@ -5,7 +5,7 @@ class Game:
     def __init__(self):
         self.score = 0
         self.last_country = None
-        self.countries = Country.fetch_all_countries()
+        self.countries = Country.load_countries_from_file()
         self.selected_region = None
         self.current_country = random.choice(self.countries)
         self.unknown_countries = []
