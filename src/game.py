@@ -11,6 +11,7 @@ class Game:
         self.unknown_countries = []
         self.regions = Country.get_regions()
 
+    # Generates three suggestions for the capital (one correct and two random).
     def generate_suggestions(self):
         """
         Generates three suggestions for the capital (1 correct, 2 random)
@@ -30,10 +31,13 @@ class Game:
         random.shuffle(suggestions)
         return suggestions
     
+    # Initializes the countries based on the selected region.
     def init_region_countries(self):
         self.countries = Country.get_countries_in_region(self.selected_region)
         self.current_country = random.choice(self.countries)
 
+    # Checks whether the provided answer matches the current country's capital. It increments the score if correct, decrements it if incorrect,
+    # and randomly selects a new country if the answer is incorrect.
     def check_answer(self,answer):
         if answer == self.current_country.capital:
             self.score += 1
@@ -49,6 +53,7 @@ class Game:
             self.current_country = random.choice(self.countries)
             return False
     
+    # Returns the current country.
     def get_current_country(self):
         if self.selected_region == None:
             self.countries = Country.fetch_all_countries()
@@ -58,5 +63,6 @@ class Game:
             self.current_country = random.choice(self.countries)
         return self.current_country
     
+    # Returns the list of regions.
     def get_regions(self):
         return self.regions
