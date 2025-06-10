@@ -23,9 +23,22 @@ def open_country_info_window(root, current_country):
     # Set the geometry of the new window
     new_window.geometry(f"{window_width}x{window_height}+{x}+{y}")
 
-    
+
+    # Format languages as a string, each on a new line
+    languages_str = "\n".join(current_country.languages)
+
     # Add content to the new window
-    info_label = tk.Label(new_window, text=f"Country: {current_country.name}\nCapital: {current_country.capital}\nRegion: {current_country.region}\nPopulation: {current_country.population}\nLanguages: {current_country.languages}", font=("Arial", 14))
+    info_label = tk.Label(
+        new_window,
+        text=(
+            f"Country: {current_country.name}\n"
+            f"Capital: {current_country.capital}\n"
+            f"Region: {current_country.region}\n"
+            f"Population: {current_country.population}\n"
+            f"Languages:\n{languages_str}"
+        ),
+        font=("Arial", 14)
+    )
     info_label.pack(pady=20)
     
     close_button = tk.Button(new_window, text="Close", command=new_window.destroy)
